@@ -3,14 +3,20 @@ import './LoginForm.css';
 import { Button, TextField } from '@mui/material';
 import { Formik } from 'formik';
 import * as yup from 'yup';
+import { useNavigate } from 'react-router-dom';
 
 function LoginForm() {
+  const navigate = useNavigate();
+
   const onSubmit = useCallback(
     (values: { username: string; password: string }, formik: any) => {
       console.log(values);
     },
     [],
   );
+  const handleLogInClick = () => {
+    navigate('/allbooks');
+  };
 
   const validationSchema = useMemo(
     () =>
@@ -66,6 +72,7 @@ function LoginForm() {
               type="submit"
               form="sigmForm"
               disabled={!(formik.isValid && formik.dirty)}
+              onClick={handleLogInClick}
             >
               Zaloguj się
             </Button>
