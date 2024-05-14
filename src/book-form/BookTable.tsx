@@ -7,16 +7,16 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
-import { Book, BookData } from './BookData';
-import BookView from './BookView';
-import { Typography } from '@mui/material';
+import { TextField, Typography } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
+import { Book, BookData } from './BookData';
+import BookView from './BookView';
 
 const BookTable: React.FC = () => {
   const navigate = useNavigate();
-
   const bookData: Book[] = BookData();
+  const [searchText, setSearchText] = React.useState('');
   const [selectedBook, setSelectedBook] = React.useState<Book | null>(null);
   const [dialogOpen, setDialogOpen] = React.useState<boolean>(false);
 
@@ -29,15 +29,37 @@ const BookTable: React.FC = () => {
     setSelectedBook(null);
     setDialogOpen(false);
   };
+
   const handleLogOutClick = () => {
     navigate('/');
   };
+
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchText(event.target.value.toLowerCase());
+  };
+
+  const filteredBooks = searchText
+    ? bookData.filter(
+        (book) =>
+          book.isbn.toLowerCase().includes(searchText) ||
+          book.title.toLowerCase().includes(searchText) ||
+          book.author.toLowerCase().includes(searchText) ||
+          book.publisher.toLowerCase().includes(searchText),
+      )
+    : bookData;
 
   return (
     <>
       <Typography variant="h4" component="div" gutterBottom align="center">
         Book List
       </Typography>
+      <TextField
+        label="Search Books"
+        variant="outlined"
+        fullWidth
+        margin="normal"
+        onChange={handleSearchChange}
+      />
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
           <TableHead>
@@ -52,7 +74,7 @@ const BookTable: React.FC = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {bookData.map((book: Book) => (
+            {filteredBooks.map((book: Book) => (
               <TableRow
                 key={book.id}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
