@@ -64,13 +64,27 @@ const BookTable: React.FC = () => {
         <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
           <TableHead>
             <TableRow>
-              <TableCell>ID</TableCell>
-              <TableCell>ISBN</TableCell>
-              <TableCell>Title</TableCell>
-              <TableCell>Author</TableCell>
-              <TableCell>Publisher</TableCell>
-              <TableCell>Year of Publish</TableCell>
-              <TableCell>Show Details</TableCell>{' '}
+              <TableCell>
+                <strong>ID</strong>
+              </TableCell>
+              <TableCell>
+                <strong>ISBN</strong>
+              </TableCell>
+              <TableCell>
+                <strong>Title</strong>
+              </TableCell>
+              <TableCell>
+                <strong>Author</strong>
+              </TableCell>
+              <TableCell>
+                <strong>Publisher</strong>
+              </TableCell>
+              <TableCell>
+                <strong>Year of Publish</strong>
+              </TableCell>
+              <TableCell>
+                <strong>Show Details</strong>
+              </TableCell>{' '}
             </TableRow>
           </TableHead>
           <TableBody>
