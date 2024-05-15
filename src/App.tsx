@@ -1,18 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import LoginForm from './login-form/LoginFrom';
-import BookView from './book-form/BookView';
 import BookTable from './book-form/BookTable';
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import {
+  Route,
+  BrowserRouter as Router,
+  Routes,
+  Navigate,
+} from 'react-router-dom';
+import BookRented from './book-form/BookRented';
 
 function App() {
   return (
     <>
       <Router>
         <Routes>
-          <Route path="/" element={<LoginForm />} />
+          <Route path="/" element={<Navigate to={'/login'} />} />
+          <Route path="/login" element={<LoginForm />} />
           <Route path="/allbooks" element={<BookTable />} />
+          <Route path="/rentedbooks" element={<BookRented />} />
         </Routes>
       </Router>
     </>

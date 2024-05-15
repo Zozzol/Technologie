@@ -1,37 +1,46 @@
-import * as React from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import Button from '@mui/material/Button';
-import { TextField, Typography } from '@mui/material';
-import LogoutIcon from '@mui/icons-material/Logout';
-import { useNavigate } from 'react-router-dom';
-import { Book, BookData } from './BookData';
-import BookView from './BookView';
+// BookTable.tsx
+import React from 'react';
+import { ExtendedBook, BookData } from './BookData';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  IconButton,
+  TextField,
+} from '@mui/material';
+import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
+import MenuAppBar from '../app-bar/MenuAppBar';
+import { Bookmark } from '@mui/icons-material';
 
 const BookTable: React.FC = () => {
-  const navigate = useNavigate();
-  const bookData: Book[] = BookData();
+  const [books, setBooks] = React.useState<ExtendedBook[]>(BookData());
   const [searchText, setSearchText] = React.useState('');
-  const [selectedBook, setSelectedBook] = React.useState<Book | null>(null);
-  const [dialogOpen, setDialogOpen] = React.useState<boolean>(false);
 
-  const handleDetailsClick = (book: Book) => {
-    setSelectedBook(book);
-    setDialogOpen(true);
-  };
-
-  const handleDialogClose = () => {
-    setSelectedBook(null);
-    setDialogOpen(false);
-  };
-
-  const handleLogOutClick = () => {
-    navigate('/');
+  const toggleBookAvailability = (id: number) => {
+    setBooks(
+      books.map((book) => {
+        if (book.id === id) {
+          const newStatus = book.rentalInfo
+            ? !book.rentalInfo.isAvailable
+            : true;
+          return {
+            ...book,
+            rentalInfo: {
+              ...book.rentalInfo,
+              isAvailable: newStatus,
+              rentedDate: newStatus ? undefined : new Date(),
+              returnDate: newStatus ? new Date() : undefined,
+              rentedBy: newStatus ? undefined : 'Current User',
+            },
+          };
+        }
+        return book;
+      }),
+    );
   };
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,20 +48,18 @@ const BookTable: React.FC = () => {
   };
 
   const filteredBooks = searchText
-    ? bookData.filter(
+    ? books.filter(
         (book) =>
           book.isbn.toLowerCase().includes(searchText) ||
           book.title.toLowerCase().includes(searchText) ||
           book.author.toLowerCase().includes(searchText) ||
           book.publisher.toLowerCase().includes(searchText),
       )
-    : bookData;
+    : books;
 
   return (
     <>
-      <Typography variant="h4" component="div" gutterBottom align="center">
-        Book List
-      </Typography>
+      <MenuAppBar />
       <TextField
         label="Search Books"
         variant="outlined"
@@ -61,7 +68,7 @@ const BookTable: React.FC = () => {
         onChange={handleSearchChange}
       />
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+        <Table sx={{ minWidth: 650 }} size="small">
           <TableHead>
             <TableRow>
               <TableCell>
@@ -82,52 +89,33 @@ const BookTable: React.FC = () => {
               <TableCell>
                 <strong>Year of Publish</strong>
               </TableCell>
-              <TableCell>
-                <strong>Show Details</strong>
-              </TableCell>{' '}
+              <TableCell align="center">
+                <strong>Status</strong>
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {filteredBooks.map((book: Book) => (
-              <TableRow
-                key={book.id}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                hover
-              >
-                <TableCell component="th" scope="row">
-                  {book.id}
-                </TableCell>
+            {filteredBooks.map((book) => (
+              <TableRow key={book.id} hover>
+                <TableCell>{book.id}</TableCell>
                 <TableCell>{book.isbn}</TableCell>
                 <TableCell>{book.title}</TableCell>
                 <TableCell>{book.author}</TableCell>
                 <TableCell>{book.publisher}</TableCell>
                 <TableCell>{book.yearOfPublish}</TableCell>
-                <TableCell>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={() => handleDetailsClick(book)}
+                <TableCell align="center">
+                  <IconButton
+                    color={book.rentalInfo?.isAvailable ? 'success' : 'error'}
+                    onClick={() => toggleBookAvailability(book.id)}
                   >
-                    Details
-                  </Button>
+                    <Bookmark />
+                  </IconButton>
                 </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
-      <Button
-        variant="contained"
-        endIcon={<LogoutIcon />}
-        onClick={handleLogOutClick}
-      >
-        Log Out
-      </Button>
-      <BookView
-        book={selectedBook}
-        open={dialogOpen}
-        onClose={handleDialogClose}
-      />
     </>
   );
 };
