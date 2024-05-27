@@ -77,10 +77,7 @@ export function BookData(): Book[] {
       'J. B. Lippincott & Co.',
       1960,
       {
-        isAvailable: false,
-        rentedDate: new Date('2023-04-10'),
-        returnDate: new Date('2023-04-24'),
-        rentedBy: 'Bob',
+        isAvailable: true,
       },
     ),
     createBook(
@@ -90,7 +87,12 @@ export function BookData(): Book[] {
       'F. Scott Fitzgerald',
       "Charles Scribner's Sons",
       1925,
-      { isAvailable: true },
+      {
+        isAvailable: false,
+        rentedDate: new Date('2023-03-01'),
+        returnDate: new Date('2023-03-15'),
+        rentedBy: 'Charlie',
+      },
     ),
     createBook(
       6,
@@ -114,10 +116,7 @@ export function BookData(): Book[] {
       'T. Egerton',
       1813,
       {
-        isAvailable: false,
-        rentedDate: new Date('2023-04-10'),
-        returnDate: new Date('2023-04-24'),
-        rentedBy: 'Bob',
+        isAvailable: true,
       },
     ),
     createBook(
@@ -129,9 +128,9 @@ export function BookData(): Book[] {
       1869,
       {
         isAvailable: false,
-        rentedDate: new Date('2023-04-10'),
-        returnDate: new Date('2023-04-24'),
-        rentedBy: 'Bob',
+        rentedDate: new Date('2023-04-01'),
+        returnDate: new Date('2023-04-15'),
+        rentedBy: 'Dave',
       },
     ),
     createBook(
@@ -142,10 +141,7 @@ export function BookData(): Book[] {
       'Little, Brown and Company',
       1951,
       {
-        isAvailable: false,
-        rentedDate: new Date('2023-04-10'),
-        returnDate: new Date('2023-04-24'),
-        rentedBy: 'Bob',
+        isAvailable: true,
       },
     ),
     createBook(
@@ -155,7 +151,9 @@ export function BookData(): Book[] {
       'Miguel de Cervantes',
       'Francisco de Robles',
       1605,
-      { isAvailable: true },
+      {
+        isAvailable: true,
+      },
     ),
     createBook(
       11,
@@ -164,7 +162,12 @@ export function BookData(): Book[] {
       'Toni Morrison',
       'Alfred A. Knopf',
       1987,
-      { isAvailable: true },
+      {
+        isAvailable: false,
+        rentedDate: new Date('2023-02-10'),
+        returnDate: new Date('2023-02-24'),
+        rentedBy: 'Emma',
+      },
     ),
     createBook(
       12,
@@ -174,10 +177,7 @@ export function BookData(): Book[] {
       'Faber and Faber',
       1954,
       {
-        isAvailable: false,
-        rentedDate: new Date('2023-04-10'),
-        returnDate: new Date('2023-04-24'),
-        rentedBy: 'Bob',
+        isAvailable: true,
       },
     ),
     createBook(
@@ -187,7 +187,12 @@ export function BookData(): Book[] {
       'J.R.R. Tolkien',
       'George Allen & Unwin',
       1937,
-      { isAvailable: true },
+      {
+        isAvailable: false,
+        rentedDate: new Date('2023-01-05'),
+        returnDate: new Date('2023-01-20'),
+        rentedBy: 'Frank',
+      },
     ),
     createBook(
       14,
@@ -196,7 +201,9 @@ export function BookData(): Book[] {
       'Ray Bradbury',
       'Ballantine Books',
       1953,
-      { isAvailable: true },
+      {
+        isAvailable: true,
+      },
     ),
     createBook(
       15,
@@ -205,7 +212,12 @@ export function BookData(): Book[] {
       'Fyodor Dostoevsky',
       'The Russian Messenger',
       1866,
-      { isAvailable: true },
+      {
+        isAvailable: false,
+        rentedDate: new Date('2023-03-15'),
+        returnDate: new Date('2023-03-30'),
+        rentedBy: 'Grace',
+      },
     ),
   ];
 }

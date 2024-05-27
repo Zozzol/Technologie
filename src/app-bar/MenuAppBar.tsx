@@ -67,6 +67,7 @@ export default function MenuAppBar() {
           <MenuItem onClick={() => navigate('/rentedbooks')}>
             Rented Books
           </MenuItem>
+          <MenuItem onClick={() => navigate('/home')}>Home Page</MenuItem>
         </Menu>
       </Toolbar>
     </AppBar>
