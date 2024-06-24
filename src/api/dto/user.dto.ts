@@ -1,4 +1,8 @@
 export class UserDto {
   id: number | undefined;
-  name: string | undefined;
+  login: string | undefined;
+  password: string | undefined;
+  role: string | undefined;
+  email: string | undefined;
+  fullName: string | undefined;
 }

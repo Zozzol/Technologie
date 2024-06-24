@@ -16,6 +16,9 @@ export class LibraryClient {
   constructor() {
     this.client = axios.create({
       baseURL: 'http://localhost:8080',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
     });
   }
 
@@ -235,6 +238,68 @@ export class LibraryClient {
       const response: AxiosResponse<LoanDto> = await this.client.post(
         '/loan/add',
         loanData,
+      );
+      return {
+        success: true,
+        data: response.data,
+        statusCode: response.status,
+      };
+    } catch (error) {
+      const axiosError = error as AxiosError<Error>;
+      return {
+        success: false,
+        data: null,
+        statusCode: axiosError.response?.status || 0,
+      };
+    }
+  }
+
+  public async getAllUsers(): Promise<ClientResponse<UserDto[] | null>> {
+    try {
+      const response: AxiosResponse<UserDto[]> =
+        await this.client.get('/user/getAll');
+      return {
+        success: true,
+        data: response.data,
+        statusCode: response.status,
+      };
+    } catch (error) {
+      const axiosError = error as AxiosError<Error>;
+      return {
+        success: false,
+        data: null,
+        statusCode: axiosError.response?.status || 0,
+      };
+    }
+  }
+
+  public async deleteUser(
+    userId: number,
+  ): Promise<ClientResponse<string | null>> {
+    try {
+      const response: AxiosResponse<string> = await this.client.delete(
+        `/user/delete/${userId}`,
+      );
+      return {
+        success: true,
+        data: response.data,
+        statusCode: response.status,
+      };
+    } catch (error) {
+      const axiosError = error as AxiosError<Error>;
+      return {
+        success: false,
+        data: null,
+        statusCode: axiosError.response?.status || 0,
+      };
+    }
+  }
+
+  public async addUser(data: UserDto): Promise<ClientResponse<UserDto | null>> {
+    try {
+      const response: AxiosResponse<UserDto> = await this.client.post(
+        '/user/add',
+        data,
       );
       return {
         success: true,

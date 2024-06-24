@@ -1,0 +1,72 @@
+.manage-users-title {
+    color: seagreen;
+    font-weight: bold;
+    font-size: 26px;
+}
+
+.search-add-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.search-users {
+    flex-grow: 1;
+    margin-right: 10px;
+}
+
+.search-users input {
+    background: rgba(46, 139, 87, 0.3);
+    outline: none;
+    font-size: 16px;
+    color: #18443c;
+    padding: 20px 45px 20px 20px;
+}
+
+.manage-users-add-button {
+    height: 40px;
+    background: seagreen;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    cursor: pointer;
+    font-size: medium;
+    color: #fff;
+    transition: background-color 0.3s;
+}
+
+.manage-users-add-button:hover {
+    background: darkseagreen;
+}
+
+.manage-users-delete-button {
+    height: 40px;
+    background: rgba(46, 139, 87, 0.3);
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    cursor: pointer;
+    font-size: medium;
+    color: #fff;
+    transition: background-color 0.3s;
+}
+
+.manage-users-delete-button:hover {
+    background: seagreen;
+}
+
+.table-container {
+    margin-top: 20px;
+    max-height: 60vh;
+    overflow: auto;
+}
+
+.table-head-cell {
+    background-color: seagreen;
+    color: white;
+    font-weight: bold;
+}
+
+.table-body-cell {
+    color: black;
+}

@@ -17,33 +17,36 @@ import LoanPageLibrarian from './librarian/manage-loans/LoanPageLibrarian';
 import BookPageReader from './reader/search-books/BookPageReader';
 import { I18nextProvider } from 'react-i18next';
 import i18n from 'i18next';
+import UsersPageLibrarian from './librarian/manage-users/UsersPageLibrarian';
 
 function App() {
   return (
-    <>
-      <Router>
-        <I18nextProvider i18n={i18n}>
-          <ApiProvider>
-            <Routes>
-              <Route path="/" element={<Navigate to={'/login'} />} />
-              <Route path="/login" element={<LoginForm />} />
-              <Route path="/reader/home" element={<HomePageReader />} />
-              <Route path="/librarian/home" element={<HomePageLibrarian />} />
-              <Route
-                path="/librarian/manage-books"
-                element={<BookPageLibrarian />}
-              />
-              <Route
-                path="/librarian/manage-loans"
-                element={<LoanPageLibrarian />}
-              />
-              <Route path="/reader/search-books" element={<BookPageReader />} />
-              <Route path="*" element={<h1>404</h1>} />
-            </Routes>
-          </ApiProvider>
-        </I18nextProvider>
-      </Router>
-    </>
+    <Router>
+      <I18nextProvider i18n={i18n}>
+        <ApiProvider>
+          <Routes>
+            <Route path="/" element={<Navigate to={'/login'} />} />
+            <Route path="/login" element={<LoginForm />} />
+            <Route path="/reader/home" element={<HomePageReader />} />
+            <Route path="/librarian/home" element={<HomePageLibrarian />} />
+            <Route
+              path="/librarian/manage-books"
+              element={<BookPageLibrarian />}
+            />
+            <Route
+              path="/librarian/manage-loans"
+              element={<LoanPageLibrarian />}
+            />
+            <Route path="/reader/search-books" element={<BookPageReader />} />
+            <Route
+              path="/librarian/manage-users"
+              element={<UsersPageLibrarian />}
+            ></Route>
+            <Route path="*" element={<h1>404</h1>} />
+          </Routes>
+        </ApiProvider>
+      </I18nextProvider>
+    </Router>
   );
 }
 export default App;
