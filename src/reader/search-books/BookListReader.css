@@ -1,0 +1,42 @@
+.reader-manage-books-title {
+    color: seagreen;
+    font-weight: bold;
+    font-size: 26px;
+}
+
+.search-add-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.search-books {
+    flex-grow: 1;
+    margin-right: 10px;
+}
+
+.search-books input {
+    background: rgba(46, 139, 87, 0.3);
+    outline: none;
+    font-size: 16px;
+    color: #18443c;
+    padding: 20px 45px 20px 20px;
+}
+
+.table-container {
+    margin-top: 20px;
+    max-height: 60vh;
+    overflow: auto;
+}
+
+.table-head-cell {
+    background-color: seagreen;
+    color: white;
+    font-weight: bold;
+}
+
+.table-body-cell {
+    color: black;
+}

@@ -16,10 +16,11 @@ const LoginForm: React.FC = () => {
       apiClient.login(values).then((response) => {
         if (response.success) {
           const role = localStorage.getItem('role');
+          const token = localStorage.getItem('token');
           if (role === 'ROLE_LIBRARIAN') {
-            navigate('/home/librarian');
+            navigate('/librarian/home');
           } else if (role === 'ROLE_READER') {
-            navigate('/home/reader');
+            navigate('/reader/home');
           }
         } else {
           formik.setFieldError('password', 'Invalid username or password');

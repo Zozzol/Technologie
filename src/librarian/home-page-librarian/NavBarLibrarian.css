@@ -1,0 +1,47 @@
+.nav-bar {
+    background-color: seagreen;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.nav-title {
+    color: white;
+    font-weight: bold;
+    font-size: large;
+}
+
+.nav-subtitle {
+    font-weight: normal;
+    font-size: medium;
+}
+
+.nav-read-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    background: seagreen;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    cursor: pointer;
+    font-size: medium;
+    color: #fff;
+    transition: background-color 0.3s;
+    margin-left: 5px;
+}
+
+.nav-read-button:hover {
+    background: darkseagreen;
+}
+
+.nav-read-text {
+    color: seagreen;
+}
+
+.nav-read-button .MuiButton-startIcon {
+    margin: 0; /* Remove the default margin */
+}
+
+.nav-read-button .MuiButton-startIcon svg {
+    font-size: 24px; /* Adjust the icon size as needed */
+}

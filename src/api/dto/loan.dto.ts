@@ -6,6 +6,6 @@ export class LoanDto {
   loanStartDate: Date | undefined;
   loanEndDate: Date | undefined;
   bookReturnDate: Date | undefined;
-  userLoan: UserDto | undefined;
-  bookLoan: BookDto | undefined;
+  userId: number | undefined;
+  bookId: number | undefined;
 }

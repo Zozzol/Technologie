@@ -1,0 +1,37 @@
+.home-page-lib-wrapper {
+    width: 90vw;
+    height: 90vh;
+    background: transparent;
+    backdrop-filter: blur(30px);
+    border: 2px solid rgba(255, 255, 255, .2);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+    color: #fff;
+    border-radius: 10px;
+    padding: 30px 40px;
+    margin: auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.home-page-lib-wrapper h1 {
+    font-size: 26px;
+    text-align: center;
+    font-weight: bold;
+    color: seagreen;
+}
+
+
+.home-page-lib-contact-info {
+    background: darkseagreen;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.home-page-lib-contact-info p {
+    font-size: 18px;
+    margin: 10px 0;
+}

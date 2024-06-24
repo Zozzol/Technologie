@@ -1,8 +1,9 @@
 import React from 'react';
-import { Button, Menu, MenuItem, Box, Typography } from '@mui/material';
+import { Button, Box, Typography, Menu, MenuItem } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import LogoutIcon from '@mui/icons-material/Logout';
 import MenuIcon from '@mui/icons-material/Menu';
+import HomeIcon from '@mui/icons-material/Home';
 import './NavBarReader.css';
 
 const NavBarReader: React.FC = () => {
@@ -13,7 +14,7 @@ const NavBarReader: React.FC = () => {
     navigate('/login');
   };
 
-  const handleMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleMenuClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -27,9 +28,28 @@ const NavBarReader: React.FC = () => {
   };
 
   return (
-    <Box display="flex" justifyContent="space-between" marginTop={2}>
-      <h1>Reader's Home Page</h1>
-      <Box display="flex" justifyContent="flex-start">
+    <Box
+      className="nav-bar"
+      display="flex"
+      justifyContent="space-between"
+      alignItems="center"
+    >
+      <Typography className="nav-title">
+        Library <span className="nav-subtitle">for Reader</span>
+      </Typography>
+      <Box display="flex" alignItems="center">
+        <Button className="nav-read-button" variant="contained">
+          EN
+        </Button>
+        <Button className="nav-read-button" variant="contained">
+          PL
+        </Button>
+        <Button
+          className="nav-read-button"
+          variant="contained"
+          startIcon={<HomeIcon />}
+          onClick={() => handleNavigation('/reader/home')}
+        ></Button>
         <Button
           className="nav-read-button"
           variant="contained"
@@ -49,13 +69,13 @@ const NavBarReader: React.FC = () => {
         >
           <MenuItem
             className="nav-read-text"
-            onClick={() => handleNavigation('/book/getAll')}
+            onClick={() => handleNavigation('/reader/search-books')}
           >
-            Book Search
+            Search for book
           </MenuItem>
           <MenuItem
             className="nav-read-text"
-            onClick={() => handleNavigation('/loan/getAll')}
+            onClick={() => handleNavigation('/reader/my-loans')}
           >
             My loans
           </MenuItem>
