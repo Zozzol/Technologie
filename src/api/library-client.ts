@@ -192,6 +192,25 @@ export class LibraryClient {
     }
   }
 
+  public async getMyLoans(): Promise<ClientResponse<LoanDto[] | null>> {
+    try {
+      const response: AxiosResponse<LoanDto[]> =
+        await this.client.get('/loan/getMyLoans');
+      return {
+        success: true,
+        data: response.data,
+        statusCode: response.status,
+      };
+    } catch (error) {
+      const axiosError = error as AxiosError<Error>;
+      return {
+        success: false,
+        data: null,
+        statusCode: axiosError.response?.status || 0,
+      };
+    }
+  }
+
   public async updateBookReturnDate(
     loanId: number,
     date: string,

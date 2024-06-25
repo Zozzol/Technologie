@@ -33,7 +33,6 @@ const AddUserDialog: React.FC<AddUserDialogProps> = ({
   const [login, setLogin] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [role, setRole] = useState<string>('ROLE_READER');
-  const [email, setEmail] = useState<string>('');
   const [fullName, setFullName] = useState<string>('');
   const apiClient = useApi();
 
@@ -43,7 +42,6 @@ const AddUserDialog: React.FC<AddUserDialogProps> = ({
       login: login,
       password: password,
       role: role,
-      email: email,
       fullName: fullName,
     };
 
@@ -52,7 +50,7 @@ const AddUserDialog: React.FC<AddUserDialogProps> = ({
       onAdd(response.data);
       onClose();
     } else {
-      console.error('Failed to add user:', response.statusCode);
+      console.error(t('Failed to add user'), response.statusCode);
     }
   };
 
@@ -89,12 +87,6 @@ const AddUserDialog: React.FC<AddUserDialogProps> = ({
               </MenuItem>
             ))}
           </TextField>
-          <TextField
-            label={t('Email')}
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            fullWidth
-          />
           <TextField
             label={t('FullName')}
             value={fullName}

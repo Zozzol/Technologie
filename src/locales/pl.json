@@ -33,5 +33,7 @@
   "BookTitle": "Tytuł książki",
   "ManageLoansTitle": "Zarządzaj wypożyczeniami",
   "Return": "Oddaj",
-  "for Librarian": "dla bibliotekarza"
+  "for Librarian": "dla bibliotekarza",
+  "for Reader": "dla czytelnika",
+  "MyLoansList": "Moje wypożyczenia"
 }

@@ -34,7 +34,7 @@ const UsersListLibrarian: React.FC = () => {
     if (response.success && response.data) {
       setUsers(response.data);
     } else {
-      console.error('Failed to fetch users:', response.statusCode);
+      console.error(t('Failed to fetch users'), response.statusCode);
     }
   };
 
@@ -43,7 +43,7 @@ const UsersListLibrarian: React.FC = () => {
     if (response.success) {
       setUsers(users.filter((user) => user.id !== userId));
     } else {
-      console.error('Failed to delete user:', response.statusCode);
+      console.error(t('Failed to delete user'), response.statusCode);
     }
   };
 
@@ -105,7 +105,6 @@ const UsersListLibrarian: React.FC = () => {
               <TableCell className="table-head-cell">{t('Login')}</TableCell>
               <TableCell className="table-head-cell">{t('FullName')}</TableCell>
               <TableCell className="table-head-cell">{t('Role')}</TableCell>
-              <TableCell className="table-head-cell">{t('Email')}</TableCell>
               <TableCell className="table-head-cell">{t('Actions')}</TableCell>
             </TableRow>
           </TableHead>
@@ -118,7 +117,6 @@ const UsersListLibrarian: React.FC = () => {
                   {user.fullName}
                 </TableCell>
                 <TableCell className="table-body-cell">{user.role}</TableCell>
-                <TableCell className="table-body-cell">{user.email}</TableCell>
                 <TableCell className="table-body-cell">
                   <Button
                     className="manage-users-delete-button"

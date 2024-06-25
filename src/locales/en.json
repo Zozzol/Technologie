@@ -33,5 +33,7 @@
   "BookTitle": "Book Title",
   "ManageLoansTitle": "Manage Loans",
   "Return": "Return",
-  "for Librarian": "for Librarian"
+  "for Librarian": "for Librarian",
+  "for Reader": "for Reader",
+  "MyLoansList": "My Loans List"
 }

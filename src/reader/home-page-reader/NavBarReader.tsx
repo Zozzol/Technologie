@@ -4,9 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import LogoutIcon from '@mui/icons-material/Logout';
 import MenuIcon from '@mui/icons-material/Menu';
 import HomeIcon from '@mui/icons-material/Home';
+import { useTranslation } from 'react-i18next';
 import './NavBarReader.css';
 
 const NavBarReader: React.FC = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
@@ -35,15 +37,9 @@ const NavBarReader: React.FC = () => {
       alignItems="center"
     >
       <Typography className="nav-title">
-        Library <span className="nav-subtitle">for Reader</span>
+        {t('Library')} <span className="nav-subtitle">{t('for Reader')}</span>
       </Typography>
       <Box display="flex" alignItems="center">
-        <Button className="nav-read-button" variant="contained">
-          EN
-        </Button>
-        <Button className="nav-read-button" variant="contained">
-          PL
-        </Button>
         <Button
           className="nav-read-button"
           variant="contained"
@@ -71,13 +67,13 @@ const NavBarReader: React.FC = () => {
             className="nav-read-text"
             onClick={() => handleNavigation('/reader/search-books')}
           >
-            Search for book
+            {t('SearchBooks')}
           </MenuItem>
           <MenuItem
             className="nav-read-text"
             onClick={() => handleNavigation('/reader/my-loans')}
           >
-            My loans
+            {t('MyLoansList')}
           </MenuItem>
         </Menu>
       </Box>

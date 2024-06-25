@@ -18,6 +18,8 @@ import BookPageReader from './reader/search-books/BookPageReader';
 import { I18nextProvider } from 'react-i18next';
 import i18n from './i18n';
 import UsersPageLibrarian from './librarian/manage-users/UsersPageLibrarian';
+import MyLoansList from './reader/my-loans/MyLoansList';
+import MyLoansPage from './reader/my-loans/MyLoansPage';
 
 function App() {
   return (
@@ -42,6 +44,7 @@ function App() {
               path="/librarian/manage-users"
               element={<UsersPageLibrarian />}
             ></Route>
+            <Route path="/reader/my-loans" element={<MyLoansPage />} />
             <Route path="*" element={<h1>404</h1>} />
           </Routes>
         </ApiProvider>

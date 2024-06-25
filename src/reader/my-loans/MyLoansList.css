@@ -1,0 +1,21 @@
+.my-loans-title {
+    color: #04242c !important;
+    font-weight: bold !important;
+    font-size: 26px !important;
+}
+
+.table-container {
+    margin-top: 20px !important;
+    max-height: 60vh !important;
+    overflow: auto !important;
+}
+
+.table-head-cell {
+    background-color: seagreen !important;
+    color: white !important;
+    font-weight: bold !important;
+}
+
+.table-body-cell {
+    color: #04242c;
+}

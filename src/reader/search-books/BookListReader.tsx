@@ -11,11 +11,13 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 import { useApi } from '../../api/ApiProvider';
 import { BookDto } from '../../api/dto/book.dto';
 import './BookListReader.css';
 
 const BookListReader: React.FC = () => {
+  const { t } = useTranslation();
   const [books, setBooks] = useState<BookDto[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>('');
   const apiClient = useApi();
@@ -54,7 +56,9 @@ const BookListReader: React.FC = () => {
         alignItems="center"
         marginBottom={2}
       >
-        <Typography className="reader-manage-books-title">Book List</Typography>
+        <Typography className="reader-manage-books-title">
+          {t('BookList')}
+        </Typography>
       </Box>
       <Box
         display="flex"
@@ -64,7 +68,7 @@ const BookListReader: React.FC = () => {
       >
         <TextField
           className="search-books"
-          label="Search Books"
+          label={t('SearchBooks')}
           variant="outlined"
           margin="normal"
           value={searchTerm}
@@ -75,14 +79,18 @@ const BookListReader: React.FC = () => {
         <Table stickyHeader aria-label="book table">
           <TableHead>
             <TableRow>
-              <TableCell className="table-head-cell">ID</TableCell>
-              <TableCell className="table-head-cell">ISBN</TableCell>
-              <TableCell className="table-head-cell">Title</TableCell>
-              <TableCell className="table-head-cell">Author</TableCell>
-              <TableCell className="table-head-cell">Publisher</TableCell>
-              <TableCell className="table-head-cell">Publish Year</TableCell>
+              <TableCell className="table-head-cell">{t('ID')}</TableCell>
+              <TableCell className="table-head-cell">{t('ISBN')}</TableCell>
+              <TableCell className="table-head-cell">{t('Title')}</TableCell>
+              <TableCell className="table-head-cell">{t('Author')}</TableCell>
               <TableCell className="table-head-cell">
-                Available Copies
+                {t('Publisher')}
+              </TableCell>
+              <TableCell className="table-head-cell">
+                {t('PublishedYear')}
+              </TableCell>
+              <TableCell className="table-head-cell">
+                {t('AvailableCopies')}
               </TableCell>
             </TableRow>
           </TableHead>
