@@ -1,5 +1,6 @@
 import React from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
+import './LoanPageLibrarian.css'; // Import the new CSS file
 import NavBarLibrarian from '../home-page-librarian/NavBarLibrarian';
 import LoanListLibrarian from './LoanListLibrarian';
 

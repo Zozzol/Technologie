@@ -36,13 +36,17 @@ export class LibraryClient {
       const token = response.data.token;
       const role = response.data.role;
 
-      if (token && typeof token === 'string') {
+      if (token) {
         this.client.defaults.headers.common['Authorization'] =
           'Bearer ' + token;
+        this.client.interceptors.request.use((config) => {
+          config.headers['Authorization'] = 'Bearer ' + token;
+          return config;
+        });
         localStorage.setItem('token', token);
       }
 
-      if (role && typeof role === 'string') {
+      if (role) {
         localStorage.setItem('role', role);
       }
 
@@ -63,6 +67,7 @@ export class LibraryClient {
   }
 
   public async getBooks(): Promise<ClientResponse<BookDto[] | null>> {
+    console.log(this.client.defaults.headers.common['Authorization']);
     try {
       const response: AxiosResponse<BookDto[]> =
         await this.client.get('/book/getAll');
@@ -123,6 +128,7 @@ export class LibraryClient {
       };
     }
   }
+
   public async getBook(
     bookId: number,
   ): Promise<ClientResponse<BookDto | null>> {

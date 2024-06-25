@@ -16,7 +16,7 @@ import BookPageLibrarian from './librarian/manage-books/BookPageLibrarian';
 import LoanPageLibrarian from './librarian/manage-loans/LoanPageLibrarian';
 import BookPageReader from './reader/search-books/BookPageReader';
 import { I18nextProvider } from 'react-i18next';
-import i18n from 'i18next';
+import i18n from './i18n';
 import UsersPageLibrarian from './librarian/manage-users/UsersPageLibrarian';
 
 function App() {

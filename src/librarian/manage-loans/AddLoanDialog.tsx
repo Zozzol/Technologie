@@ -8,6 +8,7 @@ import {
   Button,
   Box,
 } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 import { useApi } from '../../api/ApiProvider';
 import { LoanDto } from '../../api/dto/loan.dto';
 
@@ -22,11 +23,12 @@ const AddLoanDialog: React.FC<AddLoanDialogProps> = ({
   onClose,
   onAdd,
 }) => {
+  const { t } = useTranslation();
   const [loan, setLoan] = useState<LoanDto>({
     id: undefined,
     loanStartDate: new Date(),
     loanEndDate: new Date(),
-    bookReturnDate: new Date(),
+    bookReturnDate: undefined,
     userId: undefined,
     bookId: undefined,
   });
@@ -41,9 +43,7 @@ const AddLoanDialog: React.FC<AddLoanDialogProps> = ({
     setLoan((prevLoan) => ({
       ...prevLoan,
       [name]:
-        name === 'loanStartDate' ||
-        name === 'loanEndDate' ||
-        name === 'bookReturnDate'
+        name === 'loanStartDate' || name === 'loanEndDate'
           ? new Date(value)
           : parseInt(value),
     }));
@@ -56,29 +56,31 @@ const AddLoanDialog: React.FC<AddLoanDialogProps> = ({
         ...loan,
         loanStartDate: loan.loanStartDate?.getTime(),
         loanEndDate: loan.loanEndDate?.getTime(),
-        bookReturnDate: loan.bookReturnDate?.getTime(),
+        bookReturnDate: undefined, // Ensure this is null when adding a new loan
       };
       const response = await apiClient.addLoan(loanData as LoanDto);
       if (response.success && response.data) {
-        setSuccessMessage('Loan added successfully');
+        setSuccessMessage(t('Loan added successfully'));
         onAdd(response.data);
         onClose();
       } else {
-        setError('Failed to add loan');
+        setError(t('Failed to add loan'));
       }
     } catch (error) {
-      setError('Error');
+      setError(t('Error'));
     }
   };
 
   return (
     <Dialog open={open} onClose={onClose}>
       <form onSubmit={handleSubmit}>
-        <DialogTitle>Add Loan</DialogTitle>
+        <DialogTitle>
+          {t('Add')} {t('Loan')}
+        </DialogTitle>
         <DialogContent>
           <Box display="flex" flexDirection="column" gap={2}>
             <TextField
-              label="User ID"
+              label={t('UserID')}
               name="userId"
               value={loan.userId || ''}
               onChange={handleChange}
@@ -86,7 +88,7 @@ const AddLoanDialog: React.FC<AddLoanDialogProps> = ({
               fullWidth
             />
             <TextField
-              label="Book ID"
+              label={t('BookID')}
               name="bookId"
               value={loan.bookId || ''}
               onChange={handleChange}
@@ -94,7 +96,7 @@ const AddLoanDialog: React.FC<AddLoanDialogProps> = ({
               fullWidth
             />
             <TextField
-              label="Loan Start Date"
+              label={t('LoanStartDate')}
               name="loanStartDate"
               value={loan.loanStartDate?.toISOString().split('T')[0] || ''}
               onChange={handleChange}
@@ -102,17 +104,9 @@ const AddLoanDialog: React.FC<AddLoanDialogProps> = ({
               fullWidth
             />
             <TextField
-              label="Loan End Date"
+              label={t('LoanEndDate')}
               name="loanEndDate"
               value={loan.loanEndDate?.toISOString().split('T')[0] || ''}
-              onChange={handleChange}
-              type="date"
-              fullWidth
-            />
-            <TextField
-              label="Book Return Date"
-              name="bookReturnDate"
-              value={loan.bookReturnDate?.toISOString().split('T')[0] || ''}
               onChange={handleChange}
               type="date"
               fullWidth
@@ -121,10 +115,10 @@ const AddLoanDialog: React.FC<AddLoanDialogProps> = ({
         </DialogContent>
         <DialogActions>
           <Button onClick={onClose} color="secondary">
-            Cancel
+            {t('Cancel')}
           </Button>
           <Button type="submit" color="primary">
-            Add
+            {t('Add')}
           </Button>
         </DialogActions>
       </form>

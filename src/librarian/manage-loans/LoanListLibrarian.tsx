@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {
   Box,
+  Button,
   Table,
   TableBody,
   TableCell,
@@ -9,28 +10,25 @@ import {
   TableRow,
   Paper,
   Typography,
-  Button,
   Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  TextField,
 } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 import { useApi } from '../../api/ApiProvider';
 import { LoanDto } from '../../api/dto/loan.dto';
 import { BookDto } from '../../api/dto/book.dto';
 import { UserDto } from '../../api/dto/user.dto';
-import NavBarLibrarian from '../home-page-librarian/NavBarLibrarian';
 import AddLoanDialog from './AddLoanDialog';
+import UpdateLoanDialog from './UpdateLoanDialog';
+import './LoanListLibrarian.css'; // Import the CSS file
 
 const LoanListLibrarian: React.FC = () => {
+  const { t } = useTranslation();
   const [loans, setLoans] = useState<LoanDto[]>([]);
   const [books, setBooks] = useState<{ [key: number]: BookDto }>({});
   const [users, setUsers] = useState<{ [key: number]: UserDto }>({});
-  const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
   const [isAddDialogOpen, setIsAddDialogOpen] = useState<boolean>(false);
+  const [isUpdateDialogOpen, setIsUpdateDialogOpen] = useState<boolean>(false);
   const [selectedLoan, setSelectedLoan] = useState<LoanDto | null>(null);
-  const [returnDate, setReturnDate] = useState<string>('');
   const apiClient = useApi();
 
   useEffect(() => {
@@ -84,7 +82,7 @@ const LoanListLibrarian: React.FC = () => {
       setBooks(booksMap);
       setUsers(usersMap);
     } else {
-      console.error('Failed to fetch loans:', response.statusCode);
+      console.error(t('Failed to fetch loans'), response.statusCode);
     }
   };
 
@@ -93,34 +91,25 @@ const LoanListLibrarian: React.FC = () => {
     if (response.success) {
       setLoans(loans.filter((loan) => loan.id !== loanId));
     } else {
-      console.error('Failed to delete loan:', response.statusCode);
+      console.error(t('Failed to delete loan'), response.statusCode);
     }
   };
 
-  const handleChangeDate = async () => {
-    if (selectedLoan) {
-      const date = new Date(returnDate);
-      const response = await apiClient.updateBookReturnDate(
-        selectedLoan.id!,
-        date.toISOString().split('T')[0],
-      );
-      if (response.success) {
-        fetchLoans();
-        setIsDialogOpen(false);
-      } else {
-        console.error('Failed to update return date:', response.statusCode);
-      }
-    }
+  const handleUpdateLoan = (updatedLoan: LoanDto) => {
+    setLoans((prevLoans) =>
+      prevLoans.map((loan) =>
+        loan.id === updatedLoan.id ? updatedLoan : loan,
+      ),
+    );
   };
 
-  const openChangeDateDialog = (loan: LoanDto) => {
+  const openUpdateDialog = (loan: LoanDto) => {
     setSelectedLoan(loan);
-    setReturnDate(loan.bookReturnDate?.toISOString().split('T')[0] || '');
-    setIsDialogOpen(true);
+    setIsUpdateDialogOpen(true);
   };
 
-  const closeChangeDateDialog = () => {
-    setIsDialogOpen(false);
+  const closeUpdateDialog = () => {
+    setIsUpdateDialogOpen(false);
     setSelectedLoan(null);
   };
 
@@ -144,24 +133,37 @@ const LoanListLibrarian: React.FC = () => {
         alignItems="center"
         marginBottom={2}
       >
-        <Typography variant="h5">Manage Loans</Typography>
-        <Button variant="contained" color="primary" onClick={openAddDialog}>
-          Add Loan
+        <Typography className="manage-loans-title">
+          {t('ManageLoans')}
+        </Typography>
+        <Button
+          className="manage-loans-add-button"
+          variant="contained"
+          color="primary"
+          onClick={openAddDialog}
+        >
+          {t('Add')}
         </Button>
       </Box>
       <TableContainer component={Paper} className="table-container">
         <Table stickyHeader aria-label="loan table">
           <TableHead>
             <TableRow>
-              <TableCell className="table-head-cell">ID</TableCell>
-              <TableCell className="table-head-cell">Loan Start Date</TableCell>
-              <TableCell className="table-head-cell">Loan End Date</TableCell>
+              <TableCell className="table-head-cell">{t('ID')}</TableCell>
               <TableCell className="table-head-cell">
-                Book Return Date
+                {t('LoanStartDate')}
               </TableCell>
-              <TableCell className="table-head-cell">User ID</TableCell>
-              <TableCell className="table-head-cell">Book Title</TableCell>
-              <TableCell className="table-head-cell">Actions</TableCell>
+              <TableCell className="table-head-cell">
+                {t('LoanEndDate')}
+              </TableCell>
+              <TableCell className="table-head-cell">
+                {t('BookReturnDate')}
+              </TableCell>
+              <TableCell className="table-head-cell">{t('UserID')}</TableCell>
+              <TableCell className="table-head-cell">
+                {t('BookTitle')}
+              </TableCell>
+              <TableCell className="table-head-cell">{t('Actions')}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -178,25 +180,27 @@ const LoanListLibrarian: React.FC = () => {
                   {loan.bookReturnDate?.toLocaleDateString()}
                 </TableCell>
                 <TableCell className="table-body-cell">
-                  {users[loan.userId!]?.name || loan.userId}
+                  {users[loan.userId!]?.login || loan.userId}
                 </TableCell>
                 <TableCell className="table-body-cell">
                   {books[loan.bookId!]?.title || loan.bookId}
                 </TableCell>
                 <TableCell className="table-body-cell">
                   <Button
+                    className="manage-loans-delete-button"
                     variant="contained"
                     color="secondary"
                     onClick={() => handleDeleteLoan(loan.id!)}
                   >
-                    Delete Loan
+                    {t('Delete')}
                   </Button>
                   <Button
+                    className="manage-loans-delete-button"
                     variant="contained"
                     color="primary"
-                    onClick={() => openChangeDateDialog(loan)}
+                    onClick={() => openUpdateDialog(loan)}
                   >
-                    Change Date
+                    {t('Return')}
                   </Button>
                 </TableCell>
               </TableRow>
@@ -205,31 +209,17 @@ const LoanListLibrarian: React.FC = () => {
         </Table>
       </TableContainer>
 
-      <Dialog open={isDialogOpen} onClose={closeChangeDateDialog}>
-        <DialogTitle>Change Book Return Date</DialogTitle>
-        <DialogContent>
-          <TextField
-            label="Return Date"
-            type="date"
-            value={returnDate}
-            onChange={(e) => setReturnDate(e.target.value)}
-            fullWidth
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={closeChangeDateDialog} color="secondary">
-            Cancel
-          </Button>
-          <Button onClick={handleChangeDate} color="primary">
-            Update
-          </Button>
-        </DialogActions>
-      </Dialog>
-
       <AddLoanDialog
         open={isAddDialogOpen}
         onClose={closeAddDialog}
         onAdd={handleAddLoan}
+      />
+
+      <UpdateLoanDialog
+        open={isUpdateDialogOpen}
+        onClose={closeUpdateDialog}
+        loan={selectedLoan}
+        onUpdate={handleUpdateLoan}
       />
     </Box>
   );

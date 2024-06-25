@@ -1,4 +1,4 @@
-.bookpage-lib-wrapper {
+.loanpage-lib-wrapper {
     width: 90vw;
     height: 90vh;
     background: transparent;
@@ -16,10 +16,9 @@
     align-items: center;
 }
 
-.bookpage-lib-wrapper h1 {
+.loanpage-lib-wrapper h1 {
     font-size: 26px;
     text-align: center;
     font-weight: bold;
     color: seagreen;
 }
-

@@ -97,7 +97,7 @@ const BookListReader: React.FC = () => {
                   {book.publisher}
                 </TableCell>
                 <TableCell className="table-body-cell">
-                  {book.publishYear}
+                  {book.publishedYear}
                 </TableCell>
                 <TableCell className="table-body-cell">
                   {book.availableCopies}

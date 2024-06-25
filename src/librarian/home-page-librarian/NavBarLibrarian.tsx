@@ -4,9 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import LogoutIcon from '@mui/icons-material/Logout';
 import MenuIcon from '@mui/icons-material/Menu';
 import HomeIcon from '@mui/icons-material/Home';
+import { useTranslation } from 'react-i18next';
 import './NavBarLibrarian.css';
 
 const NavBarLibrarian: React.FC = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
@@ -35,7 +37,8 @@ const NavBarLibrarian: React.FC = () => {
       alignItems="center"
     >
       <Typography className="nav-title">
-        Library <span className="nav-subtitle">for Librarian</span>
+        {t('Library')}{' '}
+        <span className="nav-subtitle">{t('for Librarian')}</span>
       </Typography>
       <Box display="flex" alignItems="center">
         <Button
@@ -65,19 +68,19 @@ const NavBarLibrarian: React.FC = () => {
             className="nav-read-text"
             onClick={() => handleNavigation('/librarian/manage-books')}
           >
-            Manage Books
+            {t('ManageBooks')}
           </MenuItem>
           <MenuItem
             className="nav-read-text"
             onClick={() => handleNavigation('/librarian/manage-loans')}
           >
-            Manage Loans
+            {t('ManageLoans')}
           </MenuItem>
           <MenuItem
             className="nav-read-text"
             onClick={() => handleNavigation('/librarian/manage-users')}
           >
-            Manage Users
+            {t('ManageUsers')}
           </MenuItem>
         </Menu>
       </Box>

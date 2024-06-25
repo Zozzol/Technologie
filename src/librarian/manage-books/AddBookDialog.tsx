@@ -31,7 +31,7 @@ const AddBookDialog: React.FC<AddBookDialogProps> = ({
     title: '',
     author: '',
     publisher: '',
-    publishYear: undefined,
+    publishedYear: undefined,
     availableCopies: undefined,
   });
 
@@ -68,6 +68,7 @@ const AddBookDialog: React.FC<AddBookDialogProps> = ({
               <TextField
                 label={t('ID')}
                 name="id"
+                type="number"
                 value={book.id}
                 onChange={handleChange}
                 fullWidth
@@ -113,7 +114,7 @@ const AddBookDialog: React.FC<AddBookDialogProps> = ({
               <TextField
                 label={t('PublishYear')}
                 name="publishYear"
-                value={book.publishYear}
+                value={book.publishedYear}
                 onChange={handleChange}
                 type="number"
                 fullWidth

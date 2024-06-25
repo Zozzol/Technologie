@@ -1,73 +1,66 @@
 .manage-books-title {
-    color: seagreen;
-    font-weight: bold;
-    font-size: 26px;
+    color: #04242c !important;
+    font-weight: bold !important;
+    font-size: 26px !important;
 }
 
 .search-add-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    margin-bottom: 10px;
+    height: 40px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 100% !important;
+    margin-bottom: 10px !important;
 }
 
 
 .search-books {
-    flex-grow: 1;
-    margin-right: 10px;
+    flex-grow: 1 !important;
+    margin-right: 10px !important;
 }
 
 .search-books input {
-    background: rgba(46, 139, 87, 0.3);
-    outline: none;
-    font-size: 16px;
-    color: #18443c;
-    padding: 20px 45px 20px 20px;
+    height: 40px !important;
+    background: rgba(46, 139, 87, 0.3) !important;
+    outline: none !important;
+    font-size: 16px !important;
+    color: #18443c !important;
+    padding: 20px 45px 20px 20px !important;
 }
 
 .manage-books-add-button {
-    height: 40px;
-    background: seagreen;
-    border-radius: 40px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
-    cursor: pointer;
-    font-size: medium;
-    color: #fff;
-    transition: background-color 0.3s;
+    height: 40px !important;
+    background: seagreen !important;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1) !important;
+    cursor: pointer !important;
+    font-size: medium !important;
+    color: #fff !important;
+    transition: background-color 0.3s !important;
 }
 
-.manage-books-add-button:hover {
-    background: darkseagreen;
-}
 
 .manage-books-delete-button {
-    height: 40px;
-    background: rgba(46, 139, 87, 0.3);
-    border-radius: 40px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
-    cursor: pointer;
-    font-size: medium;
-    color: #fff;
-    transition: background-color 0.3s;
+    height: 40px !important;
+    background: rgba(46, 139, 87, 0.3) !important;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1) !important;
+    cursor: pointer !important;
+    font-size: medium !important;
+    transition: background-color 0.3s !important;
 }
 
-.manage-books-delete-button:hover {
-    background: seagreen;
-}
 
 .table-container {
-    margin-top: 20px;
-    max-height: 60vh;
-    overflow: auto;
+    margin-top: 20px !important;
+    max-height: 60vh !important;
+    overflow: auto !important;
 }
 
 .table-head-cell {
-    background-color: seagreen;
-    color: white;
-    font-weight: bold;
+    background-color: seagreen !important;
+    color: white !important;
+    font-weight: bold !important;
 }
 
 .table-body-cell {
-    color: black;
+    color: #04242c;
 }

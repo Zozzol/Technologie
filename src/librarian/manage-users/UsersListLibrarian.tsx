@@ -12,12 +12,14 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 import { useApi } from '../../api/ApiProvider';
 import { UserDto } from '../../api/dto/user.dto';
 import AddUserDialog from './AddUserDialog';
 import './UsersListLibrarian.css';
 
 const UsersListLibrarian: React.FC = () => {
+  const { t } = useTranslation();
   const [users, setUsers] = useState<UserDto[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
@@ -68,7 +70,9 @@ const UsersListLibrarian: React.FC = () => {
         alignItems="center"
         marginBottom={2}
       >
-        <Typography variant="h5">Manage Users</Typography>
+        <Typography className="manage-users-title">
+          {t('ManageUsers')}
+        </Typography>
       </Box>
       <Box
         display="flex"
@@ -78,7 +82,7 @@ const UsersListLibrarian: React.FC = () => {
       >
         <TextField
           className="search-users"
-          label="Search Users"
+          label={t('SearchUsers')}
           variant="outlined"
           margin="normal"
           value={searchTerm}
@@ -90,19 +94,19 @@ const UsersListLibrarian: React.FC = () => {
           color="primary"
           onClick={() => setIsDialogOpen(true)}
         >
-          Add User
+          {t('Add')}
         </Button>
       </Box>
       <TableContainer component={Paper} className="table-container">
         <Table stickyHeader aria-label="user table">
           <TableHead>
             <TableRow>
-              <TableCell className="table-head-cell">ID</TableCell>
-              <TableCell className="table-head-cell">Login</TableCell>
-              <TableCell className="table-head-cell">Full Name</TableCell>
-              <TableCell className="table-head-cell">Role</TableCell>
-              <TableCell className="table-head-cell">Email</TableCell>
-              <TableCell className="table-head-cell">Actions</TableCell>
+              <TableCell className="table-head-cell">{t('ID')}</TableCell>
+              <TableCell className="table-head-cell">{t('Login')}</TableCell>
+              <TableCell className="table-head-cell">{t('FullName')}</TableCell>
+              <TableCell className="table-head-cell">{t('Role')}</TableCell>
+              <TableCell className="table-head-cell">{t('Email')}</TableCell>
+              <TableCell className="table-head-cell">{t('Actions')}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -122,7 +126,7 @@ const UsersListLibrarian: React.FC = () => {
                     color="secondary"
                     onClick={() => handleDeleteUser(user.id!)}
                   >
-                    Delete
+                    {t('Delete')}
                   </Button>
                 </TableCell>
               </TableRow>

@@ -1,4 +1,4 @@
-.bookpage-lib-wrapper {
+.userspage-lib-wrapper {
     width: 90vw;
     height: 90vh;
     background: transparent;
@@ -16,7 +16,7 @@
     align-items: center;
 }
 
-.bookpage-lib-wrapper h1 {
+.userspage-lib-wrapper h1 {
     font-size: 26px;
     text-align: center;
     font-weight: bold;

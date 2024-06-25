@@ -32,7 +32,8 @@ const BookListLibrarian: React.FC = () => {
   const fetchBooks = async () => {
     const response = await apiClient.getBooks();
     if (response.success && response.data) {
-      setBooks(response.data); // Ensure response.data is an array of BookDto
+      setBooks(response.data);
+      console.log(response.data); // Ensure response.data is an array of BookDto
     } else {
       console.error('Failed to fetch books:', response.statusCode);
     }
@@ -72,7 +73,9 @@ const BookListLibrarian: React.FC = () => {
         alignItems="center"
         marginBottom={2}
       >
-        <Typography variant="h5">{t('ManageBooks')}</Typography>
+        <Typography className="manage-books-title">
+          {t('ManageBooks')}
+        </Typography>
       </Box>
       <Box
         display="flex"
@@ -87,6 +90,7 @@ const BookListLibrarian: React.FC = () => {
           margin="normal"
           value={searchTerm}
           onChange={handleSearchChange}
+          color="success"
         />
         <Button
           className="manage-books-add-button"
@@ -94,7 +98,7 @@ const BookListLibrarian: React.FC = () => {
           color="primary"
           onClick={() => setIsDialogOpen(true)}
         >
-          {t('AddBook')}
+          {t('Add')}
         </Button>
       </Box>
       <TableContainer component={Paper} className="table-container">
@@ -109,7 +113,7 @@ const BookListLibrarian: React.FC = () => {
                 {t('Publisher')}
               </TableCell>
               <TableCell className="table-head-cell">
-                {t('PublishYear')}
+                {t('PublishedYear')}
               </TableCell>
               <TableCell className="table-head-cell">
                 {t('AvailableCopies')}
@@ -128,7 +132,7 @@ const BookListLibrarian: React.FC = () => {
                   {book.publisher}
                 </TableCell>
                 <TableCell className="table-body-cell">
-                  {book.publishYear || 'N/A'}
+                  {book.publishedYear}
                 </TableCell>
                 <TableCell className="table-body-cell">
                   {book.availableCopies}

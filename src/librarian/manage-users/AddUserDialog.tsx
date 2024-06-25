@@ -9,6 +9,7 @@ import {
   MenuItem,
   Box,
 } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 import { UserDto } from '../../api/dto/user.dto';
 import { useApi } from '../../api/ApiProvider';
 
@@ -28,6 +29,7 @@ const AddUserDialog: React.FC<AddUserDialogProps> = ({
   onClose,
   onAdd,
 }) => {
+  const { t } = useTranslation();
   const [login, setLogin] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [role, setRole] = useState<string>('ROLE_READER');
@@ -56,24 +58,26 @@ const AddUserDialog: React.FC<AddUserDialogProps> = ({
 
   return (
     <Dialog open={open} onClose={onClose}>
-      <DialogTitle>Add User</DialogTitle>
+      <DialogTitle>
+        {t('Add')} {t('User')}
+      </DialogTitle>
       <DialogContent>
         <Box display="flex" flexDirection="column" gap={2}>
           <TextField
-            label="Login"
+            label={t('Login')}
             value={login}
             onChange={(e) => setLogin(e.target.value)}
             fullWidth
           />
           <TextField
-            label="Password"
+            label={t('Password')}
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             fullWidth
           />
           <TextField
-            label="Role"
+            label={t('Role')}
             select
             value={role}
             onChange={(e) => setRole(e.target.value)}
@@ -81,18 +85,18 @@ const AddUserDialog: React.FC<AddUserDialogProps> = ({
           >
             {roles.map((option) => (
               <MenuItem key={option.value} value={option.value}>
-                {option.label}
+                {t(option.label)}
               </MenuItem>
             ))}
           </TextField>
           <TextField
-            label="Email"
+            label={t('Email')}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             fullWidth
           />
           <TextField
-            label="Full Name"
+            label={t('FullName')}
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
             fullWidth
@@ -100,11 +104,11 @@ const AddUserDialog: React.FC<AddUserDialogProps> = ({
         </Box>
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose} color="secondary">
-          Cancel
+        <Button onClick={onClose} color="success">
+          {t('Cancel')}
         </Button>
-        <Button onClick={handleAddUser} color="primary">
-          Add
+        <Button onClick={handleAddUser} color="success">
+          {t('Add')}
         </Button>
       </DialogActions>
     </Dialog>

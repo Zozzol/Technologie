@@ -4,6 +4,6 @@ export class BookDto {
   title: string | undefined;
   author: string | undefined;
   publisher: string | undefined;
-  publishYear: number | undefined;
+  publishedYear: number | undefined;
   availableCopies: number | undefined;
 }
